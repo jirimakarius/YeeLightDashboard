@@ -1,1 +1,5 @@
-{{ $ctrl.param }}
+<color-picker ng-model="$ctrl.color" ng-if="$ctrl.bulb.rgb" on-select="$ctrl.onSelect(color)"></color-picker>
+<md-slider flex min="0" max="100" ng-model="$ctrl.bulb.bright" ng-change="$ctrl.setBrightness()" aria-label="Brightness"></md-slider>
+<md-button ng-click="$ctrl.power()" class="md-fab">
+  <md-icon>power_settings_new</md-icon>
+</md-button>

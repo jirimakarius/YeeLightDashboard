@@ -20,8 +20,10 @@ class ZeroconfBrowser:
 
     def on_service_state_change(self, zeroconf, service_type, name, state_change):
         bulbs = discover_bulbs()
-        ret = {}
+        ret = self.bulbs
         for bulb in bulbs:
-            ret[bulb['ip']] = (Bulb(bulb['ip']))
+            if bulb['ip'] in ret:
+                continue
+            ret[bulb['ip']] = Bulb(bulb['ip'], auto_on=True)
 
         self.bulbs = ret

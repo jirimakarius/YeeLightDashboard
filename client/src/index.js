@@ -16,6 +16,7 @@ import {control} from './app/components/control/control';
 import config from './config';
 import events from './events';
 import './app/services/socketio';
+import './app/services/filter';
 
 import './index.css';
 import 'angular-material/angular-material.css';
@@ -24,7 +25,7 @@ import 'angular-radial-color-picker/dist/css/color-picker.css';
 export const app = 'app';
 
 angular
-  .module(app, ['ngMaterial', 'ui.router', 'color.picker.core', 'btford.socket-io', 'Services.SocketIO'])
+  .module(app, ['ngMaterial', 'ui.router', 'color.picker.core', 'btford.socket-io', 'Services.SocketIO', 'Filters'])
   .component('app', main)
   .component('toolbar', toolbar)
   .component('bulb', bulb)

@@ -13,6 +13,7 @@ def bg_emit():
     ret = []
     for ip, bulb in zeroconf.bulbs.items():
         i = bulb.get_properties()
+        i['bright'] = int(i['bright'])
         i['ip'] = ip
         ret.append(i)
     print(ret)
@@ -22,6 +23,6 @@ def bg_emit():
 def listen():
     while True:
         bg_emit()
-        eventlet.sleep(1)
+        eventlet.sleep(4)
 
 eventlet.spawn(listen)

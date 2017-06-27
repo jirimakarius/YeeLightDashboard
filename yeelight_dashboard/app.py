@@ -6,7 +6,7 @@ eventlet.monkey_patch()
 
 app = Flask(__name__)
 api = Api(app)
-socketio = SocketIO(app)
+socketio = SocketIO(app, async_mode='eventlet')
 
 from yeelight_dashboard.bulbs import ZeroconfBrowser
 zeroconf = ZeroconfBrowser()
