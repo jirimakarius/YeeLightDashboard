@@ -3,12 +3,19 @@ import '@uirouter/angularjs';
 import 'angular-aria';
 import 'angular-animate';
 import 'angular-material';
-import 'propeller';
+import 'Propeller';
 import 'angular-radial-color-picker';
+import 'angular-socket-io';
+import 'lodash';
 
-import {hello} from './app/hello';
+import {main} from './app/components/main/main';
+import {toolbar} from './app/components/toolbar/toolbar';
+import {bulb} from './app/components/bulb/bulb';
+import {control} from './app/components/control/control';
 
 import config from './config';
+import events from './events';
+import './app/services/socketio';
 
 import './index.css';
 import 'angular-material/angular-material.css';
@@ -17,6 +24,10 @@ import 'angular-radial-color-picker/dist/css/color-picker.css';
 export const app = 'app';
 
 angular
-  .module(app, ['ngMaterial', 'ui.router', 'color.picker.core'])
-  .component('app', hello)
-  .config(config);
+  .module(app, ['ngMaterial', 'ui.router', 'color.picker.core', 'btford.socket-io', 'Services.SocketIO'])
+  .component('app', main)
+  .component('toolbar', toolbar)
+  .component('bulb', bulb)
+  .component('control', control)
+  .config(config)
+  .run(events);

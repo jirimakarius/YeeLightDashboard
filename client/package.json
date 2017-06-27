@@ -5,7 +5,10 @@
     "angular-animate": "^1.6.4",
     "angular-aria": "^1.6.4",
     "angular-material": "^1.1.4",
-    "angular-radial-color-picker": "^2.1.0"
+    "angular-radial-color-picker": "^2.1.0",
+    "angular-socket-io": "^0.7.0",
+    "lodash": "^4.17.4",
+    "socket.io-client": "^2.0.3"
   },
   "devDependencies": {
     "@types/angular": "^1.6.6",

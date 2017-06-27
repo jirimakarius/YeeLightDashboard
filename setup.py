@@ -9,5 +9,5 @@ setup(
     license='MIT',
     url='https://github.com/meadowfrey/YeeLightDashboard',
     packages=find_packages(),
-    install_requires=['Flask', 'yeelight', 'flask_restful']
+    install_requires=['Flask', 'yeelight', 'flask_restful', 'flask-socketio', 'eventlet', 'zeroconf']
 )
