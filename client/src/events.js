@@ -1,6 +1,8 @@
-export default function ($rootScope, discoverIO) {
+export default function ($rootScope, discoverIO, $q) {
   $rootScope.bulbs = [];
+  $rootScope.loaded = $q.defer();
   discoverIO.on('message', message => {
+    $rootScope.loaded.resolve();
     const delet = _.differenceWith($rootScope.bulbs, message, (value, other) => {
       return value.ip === other.ip;
     });

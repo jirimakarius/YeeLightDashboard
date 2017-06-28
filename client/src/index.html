@@ -13,8 +13,19 @@
   <body ng-app="app" layout="column">
     <toolbar></toolbar>
     <div layout="row" flex>
-      <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" flex>
-        Parek
+      <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" flex layout-padding>
+        <md-list flex>
+          <md-list-item ui-sref="home">
+            <div class="md-list-item-text" layout="column">
+              <h3>Home</h3>
+            </div>
+          </md-list-item>
+          <md-list-item ng-repeat="bulb in $root.bulbs" ui-sref="control({ip: bulb.ip})">
+            <div class="md-list-item-text" layout="column">
+              <p>{{ bulb.name || bulb.ip }}</p>
+            </div>
+          </md-list-item>
+        </md-list>
       </md-sidenav>
       <ui-view layout="column" flex></ui-view>
     </div>

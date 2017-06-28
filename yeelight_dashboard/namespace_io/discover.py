@@ -1,5 +1,7 @@
 import eventlet
+from eventlet.semaphore import Semaphore
 from flask_socketio import Namespace, emit
+from yeelight import BulbException, Bulb
 
 from yeelight_dashboard.app import zeroconf, socketio
 
@@ -11,11 +13,21 @@ class DiscoverIO(Namespace):
 
 def bg_emit():
     ret = []
+    lock.acquire()
     for ip, bulb in zeroconf.bulbs.items():
-        i = bulb.get_properties()
+        try:
+            i = bulb.get_properties()
+        except BulbException:
+            try:
+                zeroconf.bulbs[ip] = Bulb(ip, auto_on=True)
+                i = zeroconf.bulbs[ip].get_properties()
+            except BulbException:
+                pass
         i['bright'] = int(i['bright'])
+        i['ct'] = int(i['ct']) if i['ct'] else None
         i['ip'] = ip
         ret.append(i)
+    lock.release()
     print(ret)
     socketio.emit('message', ret, broadcast=True, namespace='/discover')
 
@@ -23,6 +35,7 @@ def bg_emit():
 def listen():
     while True:
         bg_emit()
-        eventlet.sleep(4)
+        eventlet.sleep(2)
 
-eventlet.spawn(listen)
+lock = Semaphore()
+eventlet.spawn_n(listen)

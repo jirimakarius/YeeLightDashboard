@@ -1,8 +1,11 @@
 /** @ngInject */
 const controller = function ($stateParams, $rootScope, torgbFilter, commandIO) {
   const $ctrl = this;
-  this.bulb = _.find($rootScope.bulbs, ['ip', $stateParams.ip]);
-  this.color = torgbFilter(this.bulb.rgb);
+  $rootScope.loaded.promise.then(() => {
+    $ctrl.bulb = _.find($rootScope.bulbs, ['ip', $stateParams.ip]);
+    $ctrl.color = torgbFilter($ctrl.bulb.rgb);
+  });
+
   this.onSelect = function (color) {
     const data = {
       ip: $ctrl.bulb.ip,
@@ -21,6 +24,22 @@ const controller = function ($stateParams, $rootScope, torgbFilter, commandIO) {
   };
   this.power = function () {
     commandIO.emit('toggle', {ip: $ctrl.bulb.ip});
+  };
+  this.setTemperature = function () {
+    const data = {
+      ip: $ctrl.bulb.ip,
+      value: $ctrl.bulb.ct
+    };
+    commandIO.emit('temperature', data);
+  };
+  this.white = function () {
+    const data = {
+      ip: $ctrl.bulb.ip,
+      red: 255,
+      green: 255,
+      blue: 255
+    };
+    commandIO.emit('rgb', data);
   };
 };
 

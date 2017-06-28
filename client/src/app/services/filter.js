@@ -15,4 +15,15 @@ const filters = angular.module('Filters', [])
         blue
       };
     };
+  })
+  .filter('bulbBackground', () => {
+    return bulb => {
+      if (bulb.power === 'off') {
+        return {'background-color': 'grey'};
+      }
+      if (bulb.rgb) {
+        return {'background-color': '#' + ((bulb.rgb) >>> 0).toString(16).slice(-6)};
+      }
+      return {'background-color': 'yellow'};
+    };
   });

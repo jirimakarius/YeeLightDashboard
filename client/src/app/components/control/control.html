@@ -3,3 +3,7 @@
 <md-button ng-click="$ctrl.power()" class="md-fab">
   <md-icon>power_settings_new</md-icon>
 </md-button>
+<md-button ng-click="$ctrl.white()" class="md-fab" ng-if="$ctrl.bulb.rgb">
+  <md-icon>wb_sunny</md-icon>
+</md-button>
+<md-slider flex min="1700" max="6500" ng-model="$ctrl.bulb.ct" ng-change="$ctrl.setTemperature()" aria-label="Temperature" ng-if="$ctrl.bulb.ct"></md-slider>
