@@ -1,9 +1,32 @@
-<color-picker ng-model="$ctrl.color" ng-if="$ctrl.bulb.rgb" on-select="$ctrl.onSelect(color)"></color-picker>
-<md-slider flex min="0" max="100" ng-model="$ctrl.bulb.bright" ng-change="$ctrl.setBrightness()" aria-label="Brightness"></md-slider>
-<md-button ng-click="$ctrl.power()" class="md-fab">
-  <md-icon>power_settings_new</md-icon>
-</md-button>
-<md-button ng-click="$ctrl.white()" class="md-fab" ng-if="$ctrl.bulb.rgb">
-  <md-icon>wb_sunny</md-icon>
-</md-button>
-<md-slider flex min="1700" max="6500" ng-model="$ctrl.bulb.ct" ng-change="$ctrl.setTemperature()" aria-label="Temperature" ng-if="$ctrl.bulb.ct"></md-slider>
+<div layout="column" layout-padding="20px" flex>
+  <color-picker ng-model="$ctrl.color" ng-if="$ctrl.bulb.rgb" on-select="$ctrl.onSelect(color)"></color-picker>
+  <div layout>
+      <span class="md-body-1">Brightness:</span>
+    </div>
+  <div layout="row">
+    <md-slider class="md-primary" flex min="0" max="100" ng-model="$ctrl.bulb.bright" ng-change="$ctrl.setBrightness()"
+               aria-label="Brightness"></md-slider>
+    <div flex="10" layout layout-align="center center">
+      <span class="md-body-1">{{ $ctrl.bulb.bright }}</span>
+    </div>
+  </div>
+  <div layout="row" layout-align="center center">
+    <md-button ng-click="$ctrl.power()" ng-class="{'md-warn': $ctrl.bulb.power=='on', 'md-primary': $ctrl.bulb.power=='off'}" class="md-fab">
+      <md-icon>power_settings_new</md-icon>
+    </md-button>
+    <md-button ng-click="$ctrl.white()" class="md-fab md-warn" ng-if="$ctrl.bulb.rgb">
+      <md-icon>wb_sunny</md-icon>
+    </md-button>
+  </div>
+  <div layout ng-if="$ctrl.bulb.ct">
+      <span class="md-body-1">Temperature</span>
+    </div>
+  <div layout="row" ng-if="$ctrl.bulb.ct">
+    <md-slider class="md-warn" flex min="1700" max="6500" ng-model="$ctrl.bulb.ct" ng-change="$ctrl.setTemperature()"
+             aria-label="Temperature"></md-slider>
+    <div flex="10" layout layout-align="center center">
+      <span class="md-body-1">{{ $ctrl.bulb.ct }}</span>
+    </div>
+  </div>
+</div>
+

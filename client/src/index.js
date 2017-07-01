@@ -12,6 +12,7 @@ import {main} from './app/components/main/main';
 import {toolbar} from './app/components/toolbar/toolbar';
 import {bulb} from './app/components/bulb/bulb';
 import {control} from './app/components/control/control';
+import {menu} from './app/components/menu/menu';
 
 import config from './config';
 import events from './events';
@@ -30,5 +31,6 @@ angular
   .component('toolbar', toolbar)
   .component('bulb', bulb)
   .component('control', control)
+  .controller('MenuController', menu)
   .config(config)
   .run(events);

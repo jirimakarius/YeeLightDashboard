@@ -58,7 +58,7 @@ module.exports = {
       output: {comments: false},
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     }),
-    new ExtractTextPlugin('index-[contenthash].css'),
+    new ExtractTextPlugin('index.css'),
     new webpack.optimize.CommonsChunkPlugin({name: 'vendor'}),
     new webpack.LoaderOptionsPlugin({
       options: {

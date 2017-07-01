@@ -5,7 +5,7 @@ setup(
     version='0.1.dev1',
     description='',
     author='Jiří Makarius',
-    author_email='meadowfrey@gail.com',
+    author_email='meadowfrey@gmail.com',
     license='MIT',
     url='https://github.com/meadowfrey/YeeLightDashboard',
     packages=find_packages(),

@@ -13,6 +13,6 @@ export default function ($stateProvider, $locationProvider, $urlRouterProvider) 
     .state({
       name: 'control',
       url: '/:ip',
-      template: '<control></control>'
+      template: '<control flex layout="column"></control>'
     });
 }
