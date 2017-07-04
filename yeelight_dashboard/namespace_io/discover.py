@@ -17,18 +17,22 @@ def bg_emit():
     for ip, bulb in zeroconf.bulbs.items():
         try:
             i = bulb.get_properties()
+            i['bright'] = int(i['bright'])
+            i['ct'] = int(i['ct']) if i['ct'] else None
+            i['ip'] = ip
+            ret.append(i)
         except BulbException:
             try:
                 zeroconf.bulbs[ip] = Bulb(ip, auto_on=True)
                 i = zeroconf.bulbs[ip].get_properties()
+                i['bright'] = int(i['bright'])
+                i['ct'] = int(i['ct']) if i['ct'] else None
+                i['ip'] = ip
+                ret.append(i)
             except BulbException:
                 pass
-        i['bright'] = int(i['bright'])
-        i['ct'] = int(i['ct']) if i['ct'] else None
-        i['ip'] = ip
-        ret.append(i)
     lock.release()
-    print(ret)
+    # print(ret)
     socketio.emit('message', ret, broadcast=True, namespace='/discover')
 
 
