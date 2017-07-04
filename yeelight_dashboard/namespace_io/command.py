@@ -53,3 +53,19 @@ class CommandIO(Namespace):
             except BulbException:
                 pass
         lock.release()
+
+    def on_refresh(self):
+        zeroconf.on_service_state_change()
+
+    def on_set_name(self, message):
+        print(message)
+        lock.acquire()
+        try:
+            zeroconf.bulbs[message['ip']].set_name(message['value'])
+        except BulbException:
+            try:
+                zeroconf.bulbs[message['ip']] = Bulb(message['ip'], auto_on=True)
+                zeroconf.bulbs[message['ip']].set_name(message['value'])
+            except BulbException:
+                pass
+        lock.release()

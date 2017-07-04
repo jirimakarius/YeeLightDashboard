@@ -3,7 +3,7 @@ from eventlet.semaphore import Semaphore
 from flask_socketio import Namespace, emit
 from yeelight import BulbException, Bulb
 
-from yeelight_dashboard.app import zeroconf, socketio
+from yeelight_dashboard.app import zeroconf, socketio, app
 
 
 class DiscoverIO(Namespace):
@@ -39,7 +39,7 @@ def bg_emit():
 def listen():
     while True:
         bg_emit()
-        eventlet.sleep(2)
+        eventlet.sleep(app.config['REFRESH'])
 
 lock = Semaphore()
 eventlet.spawn_n(listen)

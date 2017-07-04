@@ -1,4 +1,7 @@
-export default function ($rootScope, discoverIO, $q) {
+export default events;
+
+/** @ngInject */
+function events($rootScope, discoverIO, $q) {
   $rootScope.bulbs = [];
   $rootScope.loaded = $q.defer();
   discoverIO.on('message', message => {

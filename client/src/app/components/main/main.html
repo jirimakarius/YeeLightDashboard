@@ -1,11 +1,13 @@
-<md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6"
-        md-row-height-gt-md="1:1" md-row-height="4:3"
-        md-gutter-gt-md="16px" md-gutter-md="8px" md-gutter="4px" flex>
-  <md-grid-tile ng-repeat="bulb in $ctrl.bulbs" ng-style="bulb | bulbBackground" md-rowspan="1"
-                  md-colspan="1" ng-click="$ctrl.control(bulb.ip)">
-    <bulb data="bulb"></bulb>
-    <md-grid-tile-footer>
-      <h3>{{ bulb.name || bulb.ip }}</h3>
-    </md-grid-tile-footer>
-  </md-grid-tile>
-</md-grid-list>
+<div layout flex layout-padding>
+  <md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6"
+          md-row-height-gt-md="1:1" md-row-height="4:3"
+          md-gutter-gt-md="16px" md-gutter-md="8px" md-gutter="4px" flex>
+    <md-grid-tile ng-repeat="bulb in $ctrl.bulbs" ng-style="bulb | bulbBackground" md-rowspan="1"
+                    md-colspan="1" ng-click="$ctrl.control(bulb.ip)">
+      <bulb data="bulb"></bulb>
+      <md-grid-tile-footer>
+        <h3>{{ bulb.name || bulb.ip }}</h3>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+  </md-grid-list>
+</div>

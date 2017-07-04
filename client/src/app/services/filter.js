@@ -1,7 +1,4 @@
-export default filters;
-
-/** @ngInject */
-const filters = angular.module('Filters', [])
+export default angular.module('filters', [])
   .filter('torgb', () => {
     return input => {
       const int = parseInt(input, 10);
